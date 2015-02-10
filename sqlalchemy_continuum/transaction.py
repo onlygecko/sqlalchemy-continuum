@@ -119,11 +119,18 @@ class TransactionFactory(ModelFactory):
             __tablename__ = 'transaction'
             __versioning_manager__ = manager
 
-            id = sa.Column(
-                sa.types.BigInteger,
-                primary_key=True,
-                autoincrement=True
-            )
+            if manager.options['dialect'] == 'oracle':
+                id = sa.Column(
+                    sa.types.BigInteger,
+                    sa.Sequence('transaction_seq'),
+                    primary_key=True
+                )
+            else:
+                id = sa.Column(
+                    sa.types.BigInteger,
+                    autoincrement=True,
+                    primary_key=True
+                )
 
             if self.remote_addr:
                 remote_addr = sa.Column(sa.String(50))
