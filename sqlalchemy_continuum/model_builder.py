@@ -233,6 +233,7 @@ class ModelBuilder(object):
             mapper_args.update(self.inheritance_args(
                 cls, table, self.model.__table__)
             )
+            #mapper_args.update({'concrete': True})
             return mapper_args
 
         args['__mapper_args__'] = mapper_args
@@ -249,6 +250,7 @@ class ModelBuilder(object):
         return type(
             '%sVersion' % self.model.__name__,
             self.base_classes(),
+            #(self.model,) + self.base_classes(),
             args
         )
 

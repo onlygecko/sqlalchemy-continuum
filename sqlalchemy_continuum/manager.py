@@ -409,7 +409,7 @@ class VersioningManager(object):
                             conn,
                             table_name,
                             self.positional_args_to_dict(
-                                op, statement, params
+                                op, statement, params.copy()
                             ),
                             op
                         )
@@ -420,7 +420,7 @@ class VersioningManager(object):
                         self.positional_args_to_dict(
                             op,
                             statement,
-                            parameters
+                            parameters.copy()
                         ),
                         op
                     )
